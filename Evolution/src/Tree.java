@@ -7,7 +7,7 @@ public class Tree extends TallPlant {
 	private BufferedImage tree_image;
 
 	
-	public Tree(int x, int y, ID id, SpriteSheet ss, int sizeInDm, int leaveHeightInDm , int avgFoodPerDm, float variance) throws IllegalArgumentException {
+	public Tree(int x, int y, ID id, SpriteSheet ss, int sizeInDm, int leaveHeightInDm , float avgFoodPerDm, float variance) throws IllegalArgumentException {
 		
 		super(x, y, id, ss);
 		

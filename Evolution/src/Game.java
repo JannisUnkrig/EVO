@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable{
 		
 		ss = new SpriteSheet(sprite_sheet);
 		
-		floor = ss.grabImage(4, 2, 32, 32);
+		floor = loader.loadImage("/background_dirt.png");
 
 		loadLevel(level);
 		
@@ -94,8 +94,8 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		for(int xx = 0; xx < 30*72; xx+=32) {
-			for(int yy = 0; yy < 30*72; yy+=32) {
+		for(int xx = 0; xx < 1200; xx+=50) {
+			for(int yy = 0; yy < 800; yy+=50) {
 				g.drawImage(floor, xx, yy, null);
 			}
 		}
@@ -130,17 +130,21 @@ public class Game extends Canvas implements Runnable{
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) & 0xff;
 
-				if(red == 255)
+				if(red == 0 && green == 100 && blue == 0)
 					handler.addObject(new Tree(xx*10, yy*10, ID.Tree, ss, 100, 50, 100, (float) 0.2));
+				
+				if(red == 0 && green == 130 && blue == 0)
+					handler.addObject(new Bush(xx*10, yy*10, ID.Bush, ss, 100, 70, (float) 0.1));
+				
+				if(red == 0 && green == 250 && blue == 0)
+					handler.addObject(new Grass(xx*10, yy*10, ID.Grass, ss, 30, (float) 0.25));
 				
 //				if(blue == 255 && green == 0)
 //					handler.addObject(new PlayerCharacter(xx*32+8, yy*32+8, ID.Player, handler, this, ss));
 //				
 //				if(green == 255 && blue == 0)
 //					handler.addObject(new Enemy(xx*32+8, yy*32+8, ID.Enemy, 2, 2, handler, ss));
-//				
-//				if(green == 255 && blue == 255)
-//					handler.addObject(new Coin(xx*32+16, yy*32+16, ID.Coin, ss));	
+
 			}
 		}
 	}
