@@ -17,7 +17,7 @@ public class Bush extends TallPlant {
 		
 		this.foodPerDm = new float[sizeInDm];
 		for(int i = 0; i < sizeInDm; i++) {
-			foodPerDm[i] = (((float) Math.random()) * 2) * variance * avgFoodPerDm;
+			foodPerDm[i] = avgFoodPerDm + ((((float) Math.random()) * 2) - 1) * variance;
 		}
 	}
 
@@ -26,11 +26,11 @@ public class Bush extends TallPlant {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(bush_image, x, y, null);
+		g.drawImage(bush_image, x-4, y-4, null);
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 8, 8);
+		return new Rectangle(x-2, y-2, 2, 2);
 	}
 	
 }

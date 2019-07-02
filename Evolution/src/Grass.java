@@ -15,7 +15,7 @@ public class Grass extends AreaPlant {
 		
 		grass_image = ss.grabImage(4, 2, 10, 10);
 		
-		food = (((float) Math.random()) * 2) * variance * avgFood;
+		food = avgFood + ((((float) Math.random()) * 2) - 1) * variance;
 
 	}
 
@@ -24,11 +24,11 @@ public class Grass extends AreaPlant {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(grass_image, x, y, null);
+		g.drawImage(grass_image, x-5, y-5, null);
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 10, 10);
+		return new Rectangle(x-5, y-5, 5, 5);
 	}
 	
 }

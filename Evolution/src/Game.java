@@ -1,10 +1,12 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, MouseListener{
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,13 +19,11 @@ public class Game extends Canvas implements Runnable{
 	private BufferedImage sprite_sheet = null;
 	private BufferedImage floor = null;
 	
-	public int money = 0;
+	public int fpsDisplay = 0;
 	public int health = 10;
 	
 	public Game() {
-//		new Window(1167, 677, "EVO", this); //(18 * 10) * 67.5 | Room: 15 * 7
-		new Window(1200, 800, "EVO", this); //(18 * 10) * 67.5 | Room: 15 * 7
-		start();
+		new Window(1207, 830, "EVO", this);
 		
 		handler = new Handler();
 		
@@ -37,6 +37,8 @@ public class Game extends Canvas implements Runnable{
 
 		loadLevel(level);
 		
+		start();
+
 	}
 	
 	private void start() {
@@ -57,7 +59,7 @@ public class Game extends Canvas implements Runnable{
 	public void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 600.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
@@ -75,6 +77,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
+				fpsDisplay = frames;
 				frames = 0;
 			}
 		}
@@ -111,7 +114,7 @@ public class Game extends Canvas implements Runnable{
 		g.drawString("" + health, 100, 25);
 		
 		g.setColor(Color.yellow);
-		g.drawString(money + " $", 5, 50);
+		g.drawString(fpsDisplay + " fps", 5, 50);
 		
 		///////////////////////////////////
 		g.dispose();
@@ -130,14 +133,17 @@ public class Game extends Canvas implements Runnable{
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) & 0xff;
 
-				if(red == 0 && green == 100 && blue == 0)
-					handler.addObject(new Tree(xx*10, yy*10, ID.Tree, ss, 100, 50, 100, (float) 0.2));
+				if(green == 100)
+					handler.addBeingL2(new Tree(xx*10, yy*10, ID.Tree, ss, 100, 30, 50, (float) 0.2));
 				
-				if(red == 0 && green == 130 && blue == 0)
-					handler.addObject(new Bush(xx*10, yy*10, ID.Bush, ss, 100, 70, (float) 0.1));
+				if(green == 200)
+					handler.addBeingL2(new Bush(xx*10, yy*10, ID.Bush, ss, 10, 20, (float) 0.1));
 				
-				if(red == 0 && green == 250 && blue == 0)
-					handler.addObject(new Grass(xx*10, yy*10, ID.Grass, ss, 30, (float) 0.25));
+				if(blue == 100)
+					handler.addBeingL1(new Grass(xx*10, yy*10, ID.Grass, ss, 30, (float) 0.33));
+				
+				if(red == 100)
+					handler.addBeingL3(new Mammal(xx*10, yy*10, ID.Mammal, 0, 0, ss));
 				
 //				if(blue == 255 && green == 0)
 //					handler.addObject(new PlayerCharacter(xx*32+8, yy*32+8, ID.Player, handler, this, ss));
@@ -153,6 +159,36 @@ public class Game extends Canvas implements Runnable{
 	
 	public static void main(String args[]) {
 		new Game();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("hi");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

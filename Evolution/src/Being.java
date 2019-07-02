@@ -5,6 +5,9 @@ public abstract class Being {
 
 	protected int x, y;
 	protected float velX = 0, velY = 0;
+	protected float velXProgress = 0, velYProgress = 0;
+
+	protected Handler handler;
 	protected ID id;
 	protected SpriteSheet ss;
 	
@@ -15,7 +18,7 @@ public abstract class Being {
 		this.ss = ss;
 	}
 	
-	public Being(int x, int y, ID id, int velX, int velY, SpriteSheet ss) {
+	public Being(int x, int y, ID id, float velX, float velY, SpriteSheet ss) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
@@ -67,4 +70,12 @@ public abstract class Being {
 		this.velY = velY;
 	}
 	
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
 }

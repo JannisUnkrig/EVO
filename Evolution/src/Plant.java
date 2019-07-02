@@ -5,4 +5,5 @@ public abstract class Plant extends Being {
 		super(x, y, id, ss);
 	}
 	
+	public abstract boolean hasFood();
 }

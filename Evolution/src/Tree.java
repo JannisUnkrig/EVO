@@ -20,7 +20,7 @@ public class Tree extends TallPlant {
 			foodPerDm[i] = 0;
 		}
 		for(int i = leaveHeightInDm; i < sizeInDm; i++) {
-			foodPerDm[i] = (((float) Math.random()) * 2) * variance * avgFoodPerDm;
+			foodPerDm[i] = avgFoodPerDm + ((((float) Math.random()) * 2) - 1) * variance;
 		}
 	}
 
@@ -29,10 +29,10 @@ public class Tree extends TallPlant {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(tree_image, x, y, null);
+		g.drawImage(tree_image, x-5, y-5, null);
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 10, 10);
+		return new Rectangle(x-3, y-3, 3, 3);
 	}
 }
